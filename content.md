@@ -4,6 +4,8 @@
 
 # From monoliths to microservices
 
+# Communication
+
 # Autonomy vs Authority
 
 > “The ability to make your own decisions without being controlled by anyone else” - Cambridge Dictionary
@@ -14,6 +16,8 @@
 # Middlewares
 
 # Data store
+
+## Consistency
 
 # Resiliency
 

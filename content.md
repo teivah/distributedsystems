@@ -9,22 +9,30 @@ authonomy
 
 ## Coupling
 
+In the Enterprise Integration Patterns book, Gregor Hohpe and Booby Woolf defined the notion of coupling by the number assumptions two systems make about each other when they communicate.
+
 ## Communication
 
 https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
 
-### Synchronous vs Asynchronous
+## Synchronous vs Asynchronous
 
 ## Concurrency vs Parallelism
 
 ## Autonomy vs Authority
 
-> “The ability to make your own decisions without being controlled by anyone else” - Cambridge Dictionary
-> “Authority is the right to command and control other people.” - Cambridge Dictionary
+> The ability to make your own decisions without being controlled by anyone else - Cambridge Dictionary
+> Authority is the right to command and control other people - Cambridge Dictionary
 
-# API management
+## Integrity vs Consistency
 
-# Microservices architecture
+## References
+
+[1] EIP book
+
+# API Management
+
+# Microservices Architecture
 
 In 2009, Anne Thomas Manes a Gartner analyst published an famous post relate to SOA.
 
@@ -71,7 +79,7 @@ The last principle is for me the most interesting to discuss about:
 
 At first sight, this principle is a contradiction of service composability. The more a service is a sequence of other service calls, the less autonomous it is. Yet, this is not absolutely true.
 
-In case of a synchronous orchestration for example, this statement is completely valid. The service orchestrating the composed services is tighly coupled with every service in terms of availability.
+In case of a synchronous orchestration for example, this statement is completely valid. The service orchestrating the composed services has a temporal dependencies with every services.
 On the other hand, if we take the case of an asynchronous choreography, the orchestrating service does not depend anymore on the availability of the composed services.
 
 Furthermore, inter-service dependencies is not the only way for a service to loose autonomy. What if our services needs to share some data and that we chose to make them all dependent on the same database? In such cases, our services will obviously loose autonomy.
@@ -86,6 +94,8 @@ For me, microservices architecture are absolutely not different from the initial
 * Service granularity to improve service reuse and composability
 * Service autonomy to decrease cascading failures
 
+## Containers
+
 ## References
 
 [1] http://apsblog.burtongroup.com/2009/01/soa-is-dead-long-live-services.html
@@ -97,6 +107,10 @@ For me, microservices architecture are absolutely not different from the initial
 ## Domain Driven Design
 
 ## Canonical Data Model
+
+## Master Data Management
+
+//TODO: MDM article
 
 # Data Persistence
 
@@ -128,6 +142,8 @@ Load distribution
 
 # Logging & Monitoring
 
+# The Role of Middleware in Distributed Systems
+
 # Event-Based Systems
 
 ## Messaging Broker
@@ -135,7 +151,9 @@ Load distribution
 Message ordering
 Envelope
 
-# The Role of Middleware in Distributed Systems
+> There are only two hard problems in distributed systems: 2. Exactly-once delivery 1. Guaranteed order of messages 2. Exactly-once delivery - Mathias Verraes
+
+# Streaming architectures
 
 # Reactive Architectures
 
@@ -145,6 +163,6 @@ https://fr.slideshare.net/jboner/from-microliths-to-microsystems
 
 ## Reactive Systems
 
-### The Actor Model
+## The Actor Model
 
-# What's Next?
+# What's next?

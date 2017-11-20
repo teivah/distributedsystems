@@ -50,7 +50,7 @@ Yet, she believed the service-orientation remained a must-have for IT systems.
 
 > Although the word “SOA” is dead, the requirement for service-oriented architecture is stronger than ever.
 
-This post was simply delightful and ahead of its time. Today, the industry is convinced service-orientation is a must-have. Regardless if we speak about web services, REST services or microservices, the essential concept remains the same: the service.
+This post was simply delightful and ahead of its time. Today, the industry is convinced service-orientation is a must-have. Regardless if we speak about web services, REST services or microservices, the base concept remains the same: the service.
 
 Yet, if we take a look in the past, we cannot really say SOA was originally far from microservices architecture.
 
@@ -71,7 +71,7 @@ Let us now take a look at the seventh:
 
 The logic is straightforward. To be composable, a service designer must take care about its granularity. A coarse-grained service is hardly composable. On the opposite, a fine-grained service is easily composable and can be efficiently part of a broader system. 
 
-//TODO: diagram
+//TODO diagram
 
 The last principle is for me the most interesting to discuss about:
 
@@ -84,11 +84,13 @@ On the other hand, if we take the case of an asynchronous choreography, the orch
 
 Furthermore, inter-service dependencies is not the only way for a service to loose autonomy. What if our services needs to share some data and that we chose to make them all dependent on the same database? In such cases, our services will obviously loose autonomy.
 
-In my opinion, this principle was by far the less understood by SOA architects. In many SOA implementations we can services which are everything but autonomous.
+In my opinion, this is the biggest mistake of SOA architects. In many SOA implementations, we can found such services which are temporally dependent with serveral other services. This led to an overall system fragility.
 
-//TODO: diagram
+//TODO diagram
 
 What if service X is unavailable? It simply impacts the whole system. //Etc...
+
+Before the service paradigm, the base asset was the application. In many systems, the applications were autonomous. //TODO to be continued
 
 For me, microservices architecture are absolutely not different from the initial SOA philosophy. Yet it empasizes two things:
 * Service granularity to improve service reuse and composability
@@ -110,7 +112,7 @@ For me, microservices architecture are absolutely not different from the initial
 
 ## Master Data Management
 
-//TODO: MDM article
+//TODO MDM article
 
 # Data Persistence
 

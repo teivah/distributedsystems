@@ -26,11 +26,23 @@ https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
 > The ability to make your own decisions without being controlled by anyone else - Cambridge Dictionary
 > Authority is the right to command and control other people - Cambridge Dictionary
 
+//Notes from Reduce Reuse Recycle
+Don't Repeat Yourself (DRY) principle
+The more widely shared, the more flexible it must be
+The price of stability is overhead and governance – administrative complexity
+Infrastructure overhead & single point of failure which may come from poorly planned reuse
+>  Complexity trumps reuse. Reuse is not our goal, it is a possible path to our goal. And more often than not, it isn’t even a path, it is a distraction. Our real goal is not more reusable IT systems, it is simpler IT systems. Simpler systems are cheaper to build, easier to maintain, more secure, and more reliable. That is something you can bank on. Unlike reuse.
+
+Rather than naively assuming that code reuse always lowers costs, it must be evaluated taking the costs and risks noted above into account. Reuse should only be pursued where the actual costs are outweighed by the benefits.
+
+
 ## Integrity vs Consistency
 
 ## References
 
-[1] Enterprise Integration Patterns: https://www.amazon.com/dp/B007MQLL4E
+[1] [Enterprise Integration Patterns](https://www.amazon.com/dp/B007MQLL4E)
+
+[2] [Reduce, Reuse, Recycle](https://www.amazon.com/dp/B007MQLL4E) by Gene Hughson
 
 # Service Orientation
 
@@ -171,8 +183,7 @@ One key challenge, though, is to identify those bounded contexts and it might be
 
 The bounded contexts shall not be necessarily mapped onto the current organization. For example, a bounded context can encompass several departments. Bear in mind if you company is siloed, trying to break them should still be an objective. Yet, we must remain pragmative. It is very unlikely that we will achieve a single vision and a single representation for a master data.
 
-
-
+//TODO find a transition
 
 In addition DDD introduces the concept of Anti-Corruption Layer (ACL). This pattern can refer to a solution for a legacy migration (by introducing an intermediation layer between the old and the new system to prevent data quality issues etc.). But in our context when we talk about corruption it is related to data modeling debt you can introduce to solve short-term problems.
 
@@ -188,8 +199,9 @@ By the way, this is a rule of thumb. A component shall belongs to only one bound
 
 ## References
 
-[1] Enterprise Integration Patterns: https://www.amazon.com/dp/B007MQLL4E
-[2] Domain-Driven Design: https://www.amazon.com/dp/B00794TAUG/
+[1] [Enterprise Integration Patterns](https://www.amazon.com/dp/B007MQLL4E)
+
+[2] [Domain-Driven Design](https://www.amazon.com/dp/B00794TAUG/)
 
 ## Master Data Management
 

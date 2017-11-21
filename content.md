@@ -13,6 +13,8 @@ In the Enterprise Integration Patterns book, Gregor Hohpe and Booby Woolf define
 
 ## Communication
 
+## Distributed computing
+
 https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
 
 ## Synchronous vs Asynchronous
@@ -28,11 +30,9 @@ https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing
 
 ## References
 
-[1] EIP book
+[1] Enterprise Integration Patterns: https://www.amazon.com/dp/B007MQLL4E
 
-# API Management
-
-# Microservices Architecture
+# Service Orientation
 
 In 2009, Anne Thomas Manes a Gartner analyst published an famous post relate to SOA.
 
@@ -96,19 +96,100 @@ For me, microservices architecture are absolutely not different from the initial
 * Service granularity to improve service reuse and composability
 * Service autonomy to decrease cascading failures
 
+## API Management
+
+## Microservices Architecture
+
+## Middlewares
+
 ## Containers
 
 ## References
 
 [1] http://apsblog.burtongroup.com/2009/01/soa-is-dead-long-live-services.html
-
 [2] http://soapatterns.org/files/SOA_Principles_Poster.pdf
+
+# Event-Based Systems
+
+## Messaging Broker
+
+Message ordering
+Envelope
+
+> There are only two hard problems in distributed systems: 2. Exactly-once delivery 1. Guaranteed order of messages 2. Exactly-once delivery - Mathias Verraes
+
+## Streaming architectures
+
+# Reactive Architectures
+
+https://fr.slideshare.net/jboner/from-microliths-to-microsystems
+
+## Reactive Programming
+
+## Reactive Systems
+
+## The Actor Model
 
 # Data Governance
 
 ## Domain Driven Design
 
 ## Canonical Data Model
+
+A canonical data model (CDM) is defined in the Enterprise Integration Patterns book as a solution to minimize dependencies when integrating applications using different data formats. Thus, a CDM must be independent from any specific application.
+It is worth mentioning this concept should be used only as a transport data format. We would not want to use a CDM as an internal data model of a database for example.
+
+Theoretically, the advantages of a CDM are pretty obvious. It would help reducing the coupling between the applications, reducing the number of translations to be implemented for integrating a set of components etc. Pretty sexy right? One single data model, understandable by the whole landscape and a rich set of people (developers, system analysts, business stakeholders etc.) who could share the very same vision of a given concept.
+
+Nonetheless, in large organizations, it is very unlikely that such models will really deliver its expected added value.
+The reason is quite simple. Large organizations are complex by nature. A person is not the same concept for a marketing and a support department in an insurance company. A PLM part has a complete different representation depending if has been drafted by a designer of if it has to be maintained by a support team. //TODO Another example
+
+Most of the implementations result in having a very large model with a large set of optional attributes and very few mandatory ones (like an identifier but depending on the domain complexity, this is not even sure). Even though the main goal of a CDM was to ease components integration, we will just complicate it. Meanwhile, such models are creating for regular users a lot of frustrations because of its inherent complexity in terms of utilization, management, evolution impacts etc.
+
+Furthermore, regarding the coupling challenge, we just shift it somewhere else. Instead of being coupled to an external component data format, we become coupled to a common data format that would be used by the whold IT landscape and suject to very frequent changes.
+
+In my opinion, in most contexts a CDM should not be an appropriate answer. Yet, what whould the the other option if we still want to minimize the dependencies between two components when exchanging data?
+
+DDD introduces the concept of bounded context. A bounded context is simply an explicit context in which a model applies with clear boundaries with other bounded contexts. Depending on your organization a bounded context could refer to
+ * A functional domain in which an object is utilized
+ * An object state
+ * Etc.
+
+In that case the canonical data model as such would simply be the yelow part in the following diagram:
+
+//TODO diagram
+
+The intersection of A, B and C represents the set of attributes that must be there regardless of the context (basically the mandatory attributes of the previous large CDM). This part should still be carefully designed due to its central role. Yet it is important to remain pragmatic. If in your context is does not make sense to have such common model, you should simply discard it.
+
+What is also important is an intersection between two contexts (A and B, B and C, C and A). How to map one object representation from one context to another? What are the explicit attributes that should be shared across two contexts? What are the common business constraints between two contexts? These questions should still be answered by a transverse team but from a business perspective, it makes sense to raise them. That was not always the case with one single CDM shared across potentially opposite contexts.
+
+Nonetheless, regarding the parts which are not shared with other contexts (in white), it should not be part of an enterprise data model. You should be pragmatic. For example, if a subset is specific to a given domain, it should be up to the domain experts to model it themselves.
+
+One key challenge, though, is to identify those bounded contexts and it might be worth reminding here the Conway’s law:
+
+> Any organization that designs a system will inevitably produce a design whose structure is a copy of the organization’s communication structure - Melvin Conway
+
+The bounded contexts shall not be necessarily mapped onto the current organization. For example, a bounded context can encompass several departments. Bear in mind if you company is siloed, trying to break them should still be an objective. Yet, we must remain pragmative. It is very unlikely that we will achieve a single vision and a single representation for a master data.
+
+
+
+
+In addition DDD introduces the concept of Anti-Corruption Layer (ACL). This pattern can refer to a solution for a legacy migration (by introducing an intermediation layer between the old and the new system to prevent data quality issues etc.). But in our context when we talk about corruption it is related to data modeling debt you can introduce to solve short-term problems.
+
+Let us take the example of two systems in charge to manage a given state of a PLM part (a part is a physical item produced or purchased and then assembled like a helicopter rotor for instance). One legacy system (let’s call it SystemA) is in charge to manage the design phase and you must implement a new system (let’s call it SystemZ) in charge to manage the maintenance phase. The whole IT application landscape shares the same common part identifier (partId) except for SystemA which is not aware of it. Instead of the partId, SystemA manages its own identifier, systemAId. Because SystemZ needs to be call SystemA using systemAId, a heuristic could be to integrate systemAId as part of the SystemZ data model.
+
+This is a common mistake you should avoid. You simply corrupted your data model because of a short-term situation.
+
+The ACL pattern could have been a solution here. SystemZ could have implemented its own data format (without any external corruption like the systemAId). Then it would have been up to an intermediation layer to manage the translation between the partId and the systemAId.
+
+Applied to our topic, the ACL pattern enforces to implement a layer in between two different bounded contexts. A component is not aware of how to call another component which is not part of its own bounded context. Instead, a component is only aware of how to map its own data structure on the data format of the bounded context it belongs to.
+
+By the way, this is a rule of thumb. A component shall belongs to only one bounded context. This is also why DDD is a great fit for microservices architecture. Because of the fine-grained granularity, it is easier to comply with this rule.
+
+## References
+
+[1] Enterprise Integration Patterns: https://www.amazon.com/dp/B007MQLL4E
+[2] Domain-Driven Design: https://www.amazon.com/dp/B00794TAUG/
 
 ## Master Data Management
 
@@ -143,28 +224,5 @@ Load distribution
 # Security
 
 # Logging & Monitoring
-
-# The Role of Middleware in Distributed Systems
-
-# Event-Based Systems
-
-## Messaging Broker
-
-Message ordering
-Envelope
-
-> There are only two hard problems in distributed systems: 2. Exactly-once delivery 1. Guaranteed order of messages 2. Exactly-once delivery - Mathias Verraes
-
-# Streaming architectures
-
-# Reactive Architectures
-
-https://fr.slideshare.net/jboner/from-microliths-to-microsystems
-
-## Reactive Programming
-
-## Reactive Systems
-
-## The Actor Model
 
 # What's next?

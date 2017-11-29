@@ -1,3 +1,5 @@
+
+
 # Introduction
 
 ## From Monoliths to Microservices
@@ -108,11 +110,15 @@ For me, microservices architecture are absolutely not different from the initial
 * Service granularity to improve service reuse and composability
 * Service autonomy to decrease cascading failures
 
+If you're deploying all of your microservices at the same time, that's a distributed monolith. All the issues of a monolith combined with all the issues of being distributed.
+
 ## API Management
 
 ## Microservices Architecture
 
 ## Middlewares
+
+//Load balancer?
 
 ## Containers
 
@@ -221,6 +227,8 @@ http://www.allthingsdistributed.com/2008/12/eventually_consistent.html
 
 ## Event Sourcing
 
+# The Blockchain
+
 # Performance
 
 Load distribution
@@ -238,3 +246,5 @@ Load distribution
 # Logging & Monitoring
 
 # What's next?
+
+Enteprise Distributed Systems
